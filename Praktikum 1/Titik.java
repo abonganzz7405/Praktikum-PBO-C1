@@ -1,100 +1,110 @@
 public class Titik {
-    double absis;
-    double ordinat;
-    static int counterTitik = 0;
+    /**************Atribut***************/    
+    private double Absis;
+    double Ordinat;
+    private static int countertitik = 0;
 
-    Titik(){ //untuk mengacu ke titik yang tanpa parameter
-        absis = 0;
-        ordinat = 0;
-        counterTitik++;
+    /***************Method***********/
+    //konstruktor untuk membuat titik (0,0)
+    public Titik(){
+        Absis = 0;
+        Ordinat = 0;
+        countertitik++;
     }
 
-    Titik(double x, double y){ //untuk mengacu ke titik dengan parameter yang diinput manual
-        absis = x;
-        ordinat = y;
-        counterTitik++;
+    public Titik(double Absis, double Ordinat){
+        this.Absis = Absis;
+        this.Ordinat = Ordinat;
+        countertitik++;
     }
 
-    Titik(double absis, double ordinat){
-        this.absis = absis;
-        this.ordinat = ordinat;
-        counterTitik++;
+    //mengembalikan nilai counterTitik
+    public static int getcountertitik(){
+        return countertitik;
     }
 
-    Titik(){
-        this(0,0);
+    //memprint nilai counter titik
+
+    static void printcountertitik(){
+        System.out.println(countertitik);
+    }
+    //mengembalikan nilai absis
+    public double getAbsis(){
+        return Absis;
     }
 
-    double getAbsis(){
-        return absis;
+    //mengembalikan nilai ordinat
+    public double getOrdinat(){
+        return Ordinat;
     }
 
-    double getOrdinat(){
-        return ordinat;
+    //mengeset absis titik dengan nilai baru x
+    public void setAbsis(double x){
+        Absis = x;
     }
 
-    void setAbsis(double x){
-        absis = x;
+    //mengeset ordinat titik dengan nilai baru y
+    public void setOrdinat(double y){
+        Ordinat = y;
     }
 
-    void setOrdinat(double y){
-        ordinat = y;
+    //menggeser nilai absis dan ordinat titik masing masing sejauh x dan y
+    public void geser(double x, double y){
+        Absis = Absis + x;
+        Ordinat = Ordinat + y;
     }
 
-    void geser(double x, double y){
-        absis = absis + x;
-        ordinat = ordinat + y;
+    //mencetak kordinat titik
+    public void printTitik(){
+        System.out.println("Titik (" + Absis + "," + Ordinat + ")");
     }
 
-    int getKuadran(int absis, int ordinat){
-        if ( absis > 0 && ordinat > 0){
+    //mengembalikan nilai kuadran 
+    public int getkuadran(){
+        if (Absis >= 1 && Ordinat >=1){
             return 1;
-        } else if (absis < 0 && ordinat > 0){
+        }
+        else if(Absis >= 1 && Ordinat <= -1){
             return 2;
-        } else if (absis < 0 && ordinat < 0){
+        }
+        else if(Absis <= -1 && Ordinat <= -1){
             return 3;
-        } else if (absis > 0 && ordinat < 0){
+        }
+        else if (Absis <= -1 && Ordinat >=1){
             return 4;
-        } else {
+        }
+        else{
             return 0;
         }
     }
 
-    double getJarakPusat(){
-        return Math.sqrt(absis * absis + ordinat * ordinat);
+    //mengembalikan jarak pusat
+    public double getjarakpusat(){
+        return Math.sqrt(getAbsis()*getAbsis()+getOrdinat()*getOrdinat());
     }
 
-    double getJarak(Titik T){
-        return Math.sqrt(Math.pow(T.absis - this.absis, 2) + Math.pow(T.ordinat - this.ordinat, 2));
+    //mengembalikan jarak kedua titik
+    public double getjarak(Titik T){
+        return Math.sqrt((T.getAbsis()-getAbsis())*(T.getAbsis()-getAbsis())) + ((T.getOrdinat()-getOrdinat())*(T.getOrdinat()-getOrdinat()));
     }
 
-    public Titik refleksiX(){
-        return new Titik(this.absis, -this.ordinat);
+    //merefleksikan titik pada sumbu X
+    public void refleksiX(){
+        Ordinat = Ordinat * -1;
     }
 
-    public Titik refleksiY(){
-        return new Titik(-this.absis, this.ordinat);
+    //merefleksikan titik pada sumbu Y
+    public void refleksiY(){
+        Absis = Absis *-1;
     }
 
+    //mengembalikan nilai refleksi titik terhadap sb X
     public Titik getRefleksiX(){
-        return new Titik(this.absis, -this.ordinat);
+        return new Titik(Absis, -Ordinat);
     }
 
+    //mengembalikan nilai refleksi titik thd sb Y
     public Titik getRefleksiY(){
-        return new Titik(-this.absis, this.ordinat);
+        return new Titik(-Absis, Ordinat);
     }
-
-    void printTitik(){
-        System.out.println("Titik ("+ absis + "," + ordinat + ")");
-    }
-
-    static int getCounterTitik(){
-        return counterTitik;
-    }
-
-    void printcounterTitik(){
-        System.out.println(Titik.counterTitik); //akan berubah menjadi "titik" bukan "this" lagi saat deklarasinya jika diperbaiki
-    }
-
-}
-
+}// end of class titik
